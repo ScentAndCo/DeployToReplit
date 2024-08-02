@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>View Subscription Plan</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">View Subscription Plan</button>
+  </form>
+
+  {% if response_data %}
+    <h3>Billing Cycles Details</h3>
+    <div>
+      {% if response_data %}
+        <ul>
+          {% for cycle in response_data %}
+            <li>
+              <strong>Billing Attempt Expected Date:</strong> {{ cycle.node.billingAttemptExpectedDate }}<br>
+              <strong>Cycle Index:</strong> {{ cycle.node.cycleIndex }}<br>
+              <strong>Status:</strong> {{ cycle.node.status }}<br>
+              <strong>cycle Start At:</strong> {{ cycle.node.cycleStartAt }}<br>
+              <strong>cycle End At:</strong> {{ cycle.node.cycleEndAt }}<br>
+              <strong>Skipped:</strong> {{ cycle.node.skipped }}<br>
+              <strong>ContractID:</strong> {{ cycle.node.sourceContract.id }}<br>
+              <strong>CustomerID:</strong> {{ cycle.node.sourceContract.customer.id }}<br>
+            </li>
+            <br>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No billing cycles found.</p>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endblock %}

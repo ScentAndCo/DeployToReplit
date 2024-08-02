@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Add Variants to Selling Plan Group</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Variants</button>
+  </form>
+
+  {% if result %}
+    <h3>Result</h3>
+    <pre>{{ result|json_script:"result-data" }}</pre>
+    <div>
+      <p><strong>Selling Plan Group ID:</strong> {{ result.sellingPlanGroup.id }}</p>
+      {% if result.userErrors %}
+        <h4>Errors</h4>
+        <ul>
+          {% for error in result.userErrors %}
+            <li>{{ error.field }}: {{ error.message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endblock %}

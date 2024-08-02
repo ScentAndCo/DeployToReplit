@@ -1,0 +1,8 @@
+{% extends "base-embed.html" %}
+
+{% block content %}
+<div id="customer-calendar">
+    <h2>Customer Calendar for {{ customer_id }}</h2>
+    {% include "embed/_customer_events.html" %}
+</div>
+{% endblock %}

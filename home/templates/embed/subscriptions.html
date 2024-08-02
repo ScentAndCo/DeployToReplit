@@ -1,0 +1,39 @@
+{% extends "base-embed.html" %}
+
+{% block content %}
+<div id="subscriptions">
+    <h2>SUBSCRIPTIONS</h2>
+    <form method="post" action="{% url 'embed_subscriptions' %}">
+        {% csrf_token %}
+        <div class="filter-buttons">
+            <button class="Polaris-Button Polaris-Button--secondary" type="submit" name="status" value="all">All ({{status_count.ALL}})</button>
+            <button class="Polaris-Button Polaris-Button--secondary" type="submit" name="status" value="active">Active ({{status_count.ACTIVE}})</button>
+            <button class="Polaris-Button Polaris-Button--secondary" type="submit" name="status" value="paused">Paused ({{status_count.PAUSED}})</button>
+            <button class="Polaris-Button Polaris-Button--secondary" type="submit" name="status" value="cancelled">Cancelled ({{status_count.CANCELLED}})</button>
+        </div>
+    </form>
+    {% if subscriptions %}
+      <ul>
+        {% for subscription in subscriptions %}
+          <li>
+            <div class="card">
+              <div class="card-header">
+                <strong>{{ subscription.id }}: {{ subscription.customer.firstName }} {{ subscription.customer.lastName }}</strong>
+              </div>
+              <div class="card-body">
+                <div class="status">
+                    <span>{{ subscription.status }}</span>
+                </div>
+              </div>
+              <div class="card-footer">
+                <a class="Polaris-Button Polaris-Button--primary" href="{% url 'embed_subscription' subscription.id %}">View Details</a>
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No subscriptions found.</p>
+    {% endif %}
+</div>
+{% endblock %}

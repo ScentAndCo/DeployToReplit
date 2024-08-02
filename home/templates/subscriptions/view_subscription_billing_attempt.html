@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>View Subscription Billing Attempt</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">View Billing Attempt</button>
+  </form>
+
+  {% if response_data %}
+    <h3>Response</h3>
+    <pre>{{ response_data|json_script:"response-data" }}</pre>
+    <div>
+      <strong>ID:</strong> {{ response_data.data.subscriptionBillingAttempt.id }}<br>
+      <strong>Next Action URL:</strong> {{ response_data.data.subscriptionBillingAttempt.nextActionUrl }}<br>
+      <strong>Idempotency Key:</strong> {{ response_data.data.subscriptionBillingAttempt.idempotencyKey }}<br>
+      <strong>Ready:</strong> {{ response_data.data.subscriptionBillingAttempt.ready }}<br>
+      <strong>Order ID:</strong> {{ response_data.data.subscriptionBillingAttempt.order.id }}<br>
+      <strong>Subscription Contract ID:</strong> {{ response_data.data.subscriptionBillingAttempt.subscriptionContract.id }}<br>
+      <strong>Origin Time:</strong> {{ response_data.data.subscriptionBillingAttempt.originTime }}<br>
+      <strong>Completed At:</strong> {{ response_data.data.subscriptionBillingAttempt.completedAt }}<br>
+      <strong>Error Message:</strong> {{ response_data.data.subscriptionBillingAttempt.errorMessage }}<br>
+      <strong>Error Code:</strong> {{ response_data.data.subscriptionBillingAttempt.errorCode }}<br>
+    </div>
+  {% endif %}
+{% endblock %}

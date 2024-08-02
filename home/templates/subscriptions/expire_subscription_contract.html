@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Expire Subscription Contract</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Expire Contract</button>
+  </form>
+
+  {% if result %}
+    <h3>Result</h3>
+    <pre>{{ result|json_script:"result-data" }}</pre>
+    <div>
+      <p><strong>ID:</strong> {{ result.contract.id }}</p>
+      <p><strong>Status:</strong> {{ result.contract.status }}</p>
+      <p><strong>Next Billing Date:</strong> {{ result.contract.nextBillingDate }}</p>
+    </div>
+  {% endif %}
+{% endblock %}

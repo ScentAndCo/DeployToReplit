@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}Shopify Application{% endblock %}</title>
+  <link href="/static/stylesheets/application.css" media="screen" rel="stylesheet" type="text/css" />
+  <meta name="shopify-api-key" content="c5f5be49ab02f9b799c27d949006f426" />
+  <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js"></script>
+</head>
+<body>
+  <div id="container" class="clearfix">
+    <!-- Flash error & notice-->
+    {% if messages %}
+      {% for message in messages %}
+      <div{% if message.tags %} class="{{ message.tags }}-message"{% endif %}>{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+    <!-- begin div.main-->
+    <div id="main">
+      {% block content %}{% endblock %}
+    </div>
+    <!-- end div.main -->
+  </div>
+</body>
+</html>

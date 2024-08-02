@@ -1,0 +1,15 @@
+{% extends "base-embed.html" %}
+
+{% block content %}
+<div id="change-sub-product">
+    <h2>Change Subscription Product</h2>
+    <form method="post" action="{% url 'embed_change_subscription_product' subsrciption_id lineID %}">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.product_sku.label_tag }}
+            {{ form.product_sku }}
+        </div>
+        <button type="submit" class="Polaris-Button Polaris-Button--primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

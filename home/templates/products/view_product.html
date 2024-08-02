@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>View Product Details</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">View Product</button>
+  </form>
+
+  {% if result %}
+    <h3>Product Details</h3>
+    <div>
+      <p><strong>ID:</strong> {{ result.product.id }}</p>
+      <p><strong>Title:</strong> {{ result.product.title }}</p>
+      <p><strong>Description:</strong> {{ result.product.description }}</p>
+      <p><strong>Created At:</strong> {{ result.product.createdAt }}</p>
+      <p><strong>Updated At:</strong> {{ result.product.updatedAt }}</p>
+      <p><strong>Vendor:</strong> {{ result.product.vendor }}</p>
+      <p><strong>Product Type:</strong> {{ result.product.productType }}</p>
+      <p><strong>Tags:</strong> {{ result.product.tags }}</p>
+      <p><strong>Total Inventory:</strong> {{ result.product.totalInventory }}</p>
+      <h4>Variants</h4>
+      <ul>
+        {% for variant in result.product.variants.edges %}
+          <li>
+            <strong>ID:</strong> {{ variant.node.id }}<br>
+            <strong>Title:</strong> {{ variant.node.title }}<br>
+            <strong>SKU:</strong> {{ variant.node.sku }}<br>
+            <strong>Price:</strong> {{ variant.node.price }}<br>
+            <strong>Inventory Quantity:</strong> {{ variant.node.inventoryQuantity }}
+          </li>
+        {% endfor %}
+      </ul>
+      <h4>Images</h4>
+      <ul>
+        {% for image in result.product.images.edges %}
+          <li>
+            <img src="{{ image.node.src }}" alt="{{ image.node.altText }}">
+          </li>
+        {% endfor %}
+      </ul>
+      <h4>Metafields</h4>
+      <ul>
+        {% for metafield in result.product.metafields.edges %}
+          <li>
+            <strong>Namespace:</strong> {{ metafield.node.namespace }}<br>
+            <strong>Key:</strong> {{ metafield.node.key }}<br>
+            <strong>Value:</strong> {{ metafield.node.value }}<br>
+            <strong>Description:</strong> {{ metafield.node.description }}<br>
+            <strong>Type:</strong> {{ metafield.node.type }}<br>
+            <strong>Owner Type:</strong> {{ metafield.node.ownerType }}<br>
+            <strong>Created At:</strong> {{ metafield.node.createdAt }}<br>
+            <strong>Updated At:</strong> {{ metafield.node.updatedAt }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+{% endblock %}

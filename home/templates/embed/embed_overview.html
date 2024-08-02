@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="overview">
+    <h2>Subscription Overview</h2>
+    <div class="overview-details-holder">
+        <div class="overview-detail">
+            <span class="detail-label">Total Subscriptions:</span>
+            <span class="detail-value">{{ status_count.ALL }}</span>
+        </div>
+        <div class="overview-detail">
+            <span class="detail-label">Active Subscriptions:</span>
+            <span class="detail-value">{{ status_count.ACTIVE }}</span>
+        </div>
+        <div class="overview-detail">
+            <span class="detail-label">Cancelled Subscriptions:</span>
+            <span class="detail-value">{{ status_count.CANCELLED }}</span>
+        </div>
+        <div class="overview-detail">
+            <span class="detail-label">Paused Subscriptions:</span>
+            <span class="detail-value">{{ status_count.PAUSED }}</span>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base-embed.html" %}
+
+{% load custom_filters %}
+
+{% block content %}
+<div id="past-orders">
+    <h2>Past Orders</h2>
+    <div class="orders-info-holder">
+        {% if past_data.data.orders.edges %}
+            <ul>
+                {% for order in past_data.data.orders.edges %}
+                    <li class="order-details">
+                        <div class="order-info">
+                            <a href="https://admin.shopify.com/store/quickstart-cfb56ba2/orders/{{ order.node.id|replace:"gid://shopify/Order/, " }}" target="_blank">{{ order.node.name }}</a>
+                            <span>{{ order.node.createdAt|date:"d M Y"}}</span>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No past orders found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

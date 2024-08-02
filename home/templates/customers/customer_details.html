@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Customer Details</h2>
+  {% if customer_details %}
+    <p>ID: {{ customer_details.id }}</p>
+    <p>First Name: {{ customer_details.firstName }}</p>
+    <p>Last Name: {{ customer_details.lastName }}</p>
+    <p>Sub Status: {{ customer_details.productSubscriberStatus }}</p>
+    <p>Email: {{ customer_details.email }}</p>
+    <p>Phone: {{ customer_details.phone }}</p>
+    <p>Number of Orders: {{ customer_details.numberOfOrders }}</p>
+    <p>Amount Spent: {{ customer_details.amountSpent.amount }} {{ customer_details.amountSpent.currencyCode }}</p>
+    <p>Created At: {{ customer_details.createdAt }}</p>
+    <p>Updated At: {{ customer_details.updatedAt }}</p>
+    <p>Note: {{ customer_details.note }}</p>
+    <p>Verified Email: {{ customer_details.verifiedEmail }}</p>
+    <p>Valid Email Address: {{ customer_details.validEmailAddress }}</p>
+    <p>Tags: {{ customer_details.tags }}</p>
+    <p>Lifetime Duration: {{ customer_details.lifetimeDuration }}</p>
+    <p>Default Address: {{ customer_details.defaultAddress.formattedArea }}, {{ customer_details.defaultAddress.address1 }}</p>
+    <p>Addresses:</p>
+    <ul>
+      {% for address in customer_details.addresses %}
+        <li>{{ address.address1 }}</li>
+      {% endfor %}
+    </ul>
+    <p>Image: <img src="{{ customer_details.image.src }}" alt="Customer Image"></p>
+    <p>Can Delete: {{ customer_details.canDelete }}</p>
+  {% else %}
+    <p>No customer details found.</p>
+  {% endif %}
+{% endblock %}

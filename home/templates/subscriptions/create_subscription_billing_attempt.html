@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Create Subscription Billing Attempt</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create Billing Attempt</button>
+  </form>
+
+  {% if response_data %}
+    <h3>Response</h3>
+    <pre>{{ response_data|json_script:"response-data" }}</pre>
+    <div>
+      <strong>Billing Attempt ID:</strong> {{ response_data.data.subscriptionBillingAttemptCreate.subscriptionBillingAttempt.id }}<br>
+      <strong>Ready:</strong> {{ response_data.data.subscriptionBillingAttemptCreate.subscriptionBillingAttempt.ready }}<br>
+      <h4>Errors:</h4>
+      <ul>
+        {% for error in response_data.data.subscriptionBillingAttemptCreate.userErrors %}
+          <li><strong>{{ error.field }}</strong>: {{ error.message }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+{% endblock %}

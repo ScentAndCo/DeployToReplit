@@ -1,0 +1,29 @@
+{% extends "base-embed.html" %}
+
+{% block content %}
+<div id="calendar">
+    <h2>Customer Calendars</h2>
+    {% if calendars.event_details %}
+        <ul>
+            {% for customer_id in calendars.event_details %}
+                <li>
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Customer ID: {{ customer_id }}</strong>
+                        </div>
+                        <div class="card-footer">
+                            <a class="Polaris-Button Polaris-Button--primary" href="{% url 'embed_customer_calendars' customer_id %}">View Calendar</a>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No calendars found.</p>
+        <form method="get" action="{% url 'embed_add_customer_product_calendar' customer_id %}">
+            {% csrf_token %}
+            <button type="submit" class="calendar_add_product">Add Product</button>
+        </form>
+    {% endif %}
+</div>
+{% endblock %}

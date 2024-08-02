@@ -1,0 +1,425 @@
+/* General Styles */
+body, #subscriptions, #customers, #customer, #subscription, #calendar, #confirm-remove {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  text-align: center;
+  color: #212b36;
+  margin-bottom: 20px;
+}
+
+.details-holder, .actions-holder, .products-info-holder, .billing-cycles-holder, .contact-info-holder, .order-info-holder, .address-info-holder, .metafields-holder, .subscription-info-holder, .actions-holder {
+  padding: 10px;
+  background-color: #f9fafb;
+  border: 1px solid #dfe3e8;
+  border-radius: 3px;
+}
+
+.details-holder div, .actions-holder div, .products-info-holder div, .billing-cycles-holder div, .contact-info-holder div, .order-info-holder div, .address-info-holder div, .metafields-holder div, .subscription-info-holder div, .actions-holder div {
+  margin-bottom: 10px;
+}
+
+.details-holder div span:first-child, .actions-holder div span:first-child, .products-info-holder div span:first-child, .billing-cycles-holder div span:first-child, .contact-info-holder div span:first-child, .order-info-holder div span:first-child, .address-info-holder div span:first-child, .metafields-holder div span:first-child, .subscription-info-holder div span:first-child, .actions-holder div span:first-child {
+  font-weight: bold;
+  display: inline-block;
+  width: 150px; /* Adjust width as necessary */
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: #5c6ac4;
+}
+
+a:hover {
+  color: #4a5ab7;
+}
+
+.Polaris-Button {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #5c6ac4;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.Polaris-Button--primary {
+  background-color: #5c6ac4;
+  color: #fff;
+}
+
+.Polaris-Button:hover {
+  background-color: #4a5ab7;
+}
+
+.Polaris-Button--secondary {
+  background-color: #f4f6f8;
+  color: #637381;
+}
+
+/* Header */
+.customer-head, .subscription-head {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.customer-head h2, .subscription-head h2 {
+  font-size: 24px;
+  color: #212b36;
+}
+
+/* Container Styles */
+.details-container, .button-container, .subscription-actions .actions-holder {
+  display: flex;
+  justify-content: space-between;
+}
+
+.subscription-details, .customer-details {
+  width: 48%;
+}
+
+/* Section Titles */
+.subscription-details h4, .customer-details h4, .plan-details h4, .subscription-actions h4, .subscription-products-info h4, .billing-cycles-info h4, .customer-contact-info h4, .customer-order-info h4, .customer-address-info h4, .customer-metafields h4, .customer-subscription-info h4 {
+  font-size: 18px;
+  color: #212b36;
+  margin-bottom: 10px;
+}
+
+/* Products Info */
+.products-info-holder ul, .billing-cycles-holder ul, .metafields-holder ul, .other-addresses ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.products-info-holder li, .billing-cycles-holder li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.product-image {
+  width: 25%;
+  padding-right: 15px;
+}
+
+.product-image img {
+  width: auto;
+  height: 200px;
+  border-radius: 3px;
+}
+
+.product-info {
+  width: 75%;
+}
+
+.product-info div, .product-price span, .sku span:first-child {
+  margin-bottom: 10px;
+}
+
+/* Specific Styles for Subscription Info */
+.subscription-info-holder, .subscription-products-info, .billing-cycles-info, .plan-details {
+  margin-bottom: 20px;
+}
+
+/* Calendar Styles */
+#calendar ul, #calendar li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#calendar li a {
+  color: #5c6ac4;
+  background-color: #f4f6f8;
+  padding: 10px;
+  border: 1px solid #dfe3e8;
+  border-radius: 3px;
+  display: block;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#calendar li a:hover {
+  background-color: #e2e6ed;
+  color: #4a5ab7;
+}
+
+/* Confirmation Remove Styles */
+#confirm-remove {
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dfe3e8;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+#confirm-remove form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#confirm-remove form .Polaris-Button {
+  margin-top: 10px;
+}
+
+#confirm-remove form a {
+  margin-top: 10px;
+  text-decoration: none;
+  color: #637381;
+}
+
+/* Billing Cycles */
+.billing-cycle div {
+  margin-bottom: 10px;
+}
+
+.billing-cycle div span:first-child {
+  font-weight: bold;
+  display: inline-block;
+  width: 150px; /* Adjust width as necessary */
+}
+
+/* Card Styles */
+.card {
+  border: 1px solid #dfe3e8;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+  background-color: #f4f6f8;
+  padding: 10px;
+  border-bottom: 1px solid #dfe3e8;
+}
+
+.card-body {
+  padding: 10px;
+}
+
+.card-footer {
+  background-color: #f4f6f8;
+  padding: 10px;
+  text-align: right;
+  border-top: 1px solid #dfe3e8;
+}
+
+.card-footer .Polaris-Button {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #5c6ac4;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 3px;
+}
+
+/* Customer Events Styles */
+.customer-events {
+  margin-top: 20px;
+}
+
+.customer-events h4 {
+  font-size: 18px;
+  color: #212b36;
+  margin-bottom: 10px;
+}
+
+.events-holder {
+  padding: 10px;
+  background-color: #f9fafb;
+  border: 1px solid #dfe3e8;
+  border-radius: 3px;
+}
+
+.events-holder ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.events-holder li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.event-image {
+  width: 25%;
+  padding-right: 15px;
+}
+
+.event-image img {
+  height: 275px;
+  width: auto;
+  border-radius: 3px;
+}
+
+.event-details {
+  width: 75%;
+}
+
+.event-details h5 {
+  font-size: 16px;
+  color: #212b36;
+  margin-bottom: 5px;
+}
+
+.event-details p {
+  font-size: 14px;
+  color: #637381;
+  margin-bottom: 10px;
+}
+
+.calendar_remove_icon, .calendar_update_icon, .calendar_add_product {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #5c6ac4;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.calendar_remove_icon:hover, .calendar_update_icon:hover, .calendar_add_product:hover {
+  background-color: #4a5ab7;
+}
+
+.calendar_add_product {
+  margin-top: 20px;
+  width: 100%;
+  text-align: center;
+  background-color: #5c6ac4;
+  color: #fff;
+}
+
+.events-list-holder{
+  overflow: scroll;
+}
+
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Input Field Styling */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #dfe3e8;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  color: #212b36;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #5c6ac4;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(92, 106, 196, 0.3);
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: inline-block;
+  color: #212b36;
+}
+
+/* General Styles for Past Orders */
+.orders-info-holder ul {
+  list-style: none;
+  padding: 0;
+}
+
+.orders-info-holder li {
+  margin-bottom: 10px;
+}
+
+.order-details {
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid #dfe3e8;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.order-info a {
+  font-weight: bold;
+  color: #5c6ac4;
+  text-decoration: none;
+}
+
+.order-info a:hover {
+  color: #4a5ab7;
+}
+
+.order-info span {
+  font-weight: bold;
+  color: #212b36;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Subscription Overview Styles */
+#overview {
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+
+#overview h2 {
+  font-size: 24px;
+  text-align: center;
+  color: #212b36;
+  margin-bottom: 20px;
+}
+
+.overview-details-holder {
+  padding: 10px;
+  background-color: #f9fafb;
+  border: 1px solid #dfe3e8;
+  border-radius: 3px;
+}
+
+.overview-detail {
+  margin-bottom: 10px;
+}
+
+.overview-detail .detail-label {
+  font-weight: bold;
+  display: inline-block;
+  width: 150px;
+  color: #212b36;
+}
+
+.overview-detail .detail-value {
+  font-weight: normal;
+  color: #637381;
+}
+

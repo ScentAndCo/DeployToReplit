@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Subscription Contracts</h2>
+  <ul>
+    {% for subscription in subscriptions %}
+      <li>
+        <div class="subscription-entry">
+          <p>ID: {{ subscription.node.id }}</p>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Customer Subscription Contracts</h2>
+  {% if customer_details %}
+    <p>ID: {{ customer_details.id }}</p>
+    <p>Product Subscriber Status: {{ customer_details.productSubscriberStatus }}</p>
+    <h3>Subscription Contracts:</h3>
+    <ul>
+      {% for contract in customer_details.subscriptionContracts.edges %}
+        <li>
+          <p>ID: {{ contract.node.id }}</p>
+          <p>Status: {{ contract.node.status }}</p>
+          <p>Last Payment Status: {{ contract.node.lastPaymentStatus }}</p>
+          <p>Next Billing Date: {{ contract.node.nextBillingDate }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No subscription contracts found for this customer.</p>
+  {% endif %}
+{% endblock %}

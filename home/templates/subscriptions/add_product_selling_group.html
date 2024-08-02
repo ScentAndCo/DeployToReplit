@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="add-product-to-selling-group">
+    <h2>Add Product to Selling Group</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.selling_group_id.id_for_label }}">{{ form.selling_group_id.label }}</label>
+            {{ form.selling_group_id }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.product_variant_id.id_for_label }}">{{ form.product_variant_id.label }}</label>
+            {{ form.product_variant_id }}
+        </div>
+        <button type="submit" class="Polaris-Button Polaris-Button--primary">Add Product</button>
+    </form>
+</div>
+{% endblock %}

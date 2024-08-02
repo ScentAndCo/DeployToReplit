@@ -1,0 +1,39 @@
+{% block customer_events %}
+<div class="customer-events">
+    <h4>Customer Events</h4>
+    <div class="events-holder">
+        {% if calendar.event_details %}
+            <ul class="events-list-holder">
+                {% for event in calendar.event_details %}
+                    <li class="calendar-product-details">
+                        <div class="event-image calendar-product-image">
+                            <img src="{{ event.image_url }}" alt="{{ event.image_alt }}" class="product-image-calendar">
+                        </div>
+                        <div class="event-details calendar-product-title">
+                            <h5>{{ event.vendor }} {{ event.name }}</h5>
+                            <p>{{ event.date|date:"F" }}</p>
+                            <form method="post" action="{% url 'embed_remove_customer_product_calendar' customer_id event.product_id event.date %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="product_id" value="{{ event.product_id }}">
+                                <button type="submit" class="calendar_remove_icon">Remove</button>
+                            </form>
+                            <form method="get" action="{% url 'embed_update_customer_product_calendar' customer_id event.product_id event.date %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="product_id" value="{{ event.product_id }}">
+                                <button type="submit" class="calendar_update_icon">Update</button>
+                            </form>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <form method="get" action="{% url 'embed_add_customer_product_calendar' customer_id %}">
+                {% csrf_token %}
+                <button type="submit" class="calendar_add_product">Add Product</button>
+            </form>
+        {% else %}
+            <p>No events found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>View Subscription Plan</h2>
+
+  {% if response_data %}
+    <h3>Subscription Plan Details</h3>
+    <pre>{{ response_data|json_script:"response-data" }}</pre>
+    <div>
+      <strong>Plan ID:</strong> {{ response_data.data.sellingPlanGroup.id }}<br>
+      <strong>Name:</strong> {{ response_data.data.sellingPlanGroup.name }}<br>
+      <strong>Options:</strong> {{ response_data.data.sellingPlanGroup.options }}<br>
+      <strong>Selling Plans:</strong>
+      <ul>
+        {% for plan in response_data.data.sellingPlanGroup.sellingPlans.edges %}
+          <li>
+            <strong>Plan ID:</strong> {{ plan.node.id }}<br>
+            <strong>Name:</strong> {{ plan.node.name }}<br>
+            <strong>Description:</strong> {{ plan.node.description }}<br>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+{% endblock %}

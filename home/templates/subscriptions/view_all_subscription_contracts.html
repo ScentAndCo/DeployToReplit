@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>All Subscription Contracts</h2>
+
+  {% if response_data %}
+    <div>
+      {% for edge in response_data.data.subscriptionContracts.edges %}
+        <div>
+          <h3>Contract ID: {{ edge.node.id }}</h3>
+          <p>Status: {{ edge.node.status }}</p>
+          <p>Next Billing Date: {{ edge.node.nextBillingDate }}</p>
+          <p>Last Payment Status: {{ edge.node.lastPaymentStatus }}</p>
+          <h4>Customer Information:</h4>
+          <p>ID: {{ edge.node.customer.id }}</p>
+          <p>Name: {{ edge.node.customer.firstName }} {{ edge.node.customer.lastName }}</p>
+          <p>Email: {{ edge.node.customer.email }}</p>
+          <h4>Billing Policy:</h4>
+          <ul>
+            <li><strong>Interval:</strong> {{ edge.node.billingPolicy.interval }}</li>
+            <li><strong>Interval Count:</strong> {{ edge.node.billingPolicy.intervalCount }}</li>
+            <li><strong>Min Cycles:</strong> {{ edge.node.billingPolicy.minCycles }}</li>
+            <li><strong>Max Cycles:</strong> {{ edge.node.billingPolicy.maxCycles }}</li>
+            <li><strong>Anchors:</strong>
+              <ul>
+                {% for anchor in edge.node.billingPolicy.anchors %}
+                  <li>
+                    <strong>Day:</strong> {{ anchor.day }},
+                    <strong>Month:</strong> {{ anchor.month }},
+                    <strong>Cutoff Day:</strong> {{ anchor.cutoffDay }},
+                    <strong>Type:</strong> {{ anchor.type }}
+                  </li>
+                {% endfor %}
+              </ul>
+            </li>
+          </ul>
+          <h4>Delivery Price:</h4>
+          <p>{{ edge.node.deliveryPrice.amount }} {{ edge.node.deliveryPrice.currencyCode }}</p>
+          <h4>Line Items:</h4>
+          <ul>
+            {% for item in edge.node.lines.edges %}
+              <li>
+                <strong>ID:</strong> {{ item.node.id }}<br>
+                <strong>Title:</strong> {{ item.node.title }}<br>
+                <strong>Variant Title:</strong> {{ item.node.variantTitle }}<br>
+                <strong>Variant ID:</strong> {{ item.node.variantId }}<br>
+                <strong>Product ID:</strong> {{ item.node.productId }}<br>
+                <strong>Quantity:</strong> {{ item.node.quantity }}<br>
+                <strong>Price:</strong> {{ item.node.currentPrice.amount }} {{ item.node.currentPrice.currencyCode }}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <hr>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No subscription contracts found.</p>
+  {% endif %}
+{% endblock %}

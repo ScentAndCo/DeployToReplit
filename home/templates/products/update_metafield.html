@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Update Product Metafield</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Metafield</button>
+  </form>
+
+  {% if result %}
+    <h3>Metafield Update Result</h3>
+    <pre>{{ result|json_script:"result-data" }}</pre>
+    <div>
+      <p><strong>ID:</strong> {{ result.product.id }}</p>
+      <p><strong>Metafields:</strong></p>
+      <ul>
+        {% for metafield in result.product.metafields.edges %}
+          <li>
+            <strong>Namespace:</strong> {{ metafield.node.namespace }}<br>
+            <strong>Key:</strong> {{ metafield.node.key }}<br>
+            <strong>Value:</strong> {{ metafield.node.value }}<br>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+{% endblock %}

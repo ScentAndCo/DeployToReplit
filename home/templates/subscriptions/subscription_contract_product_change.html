@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Change Product Variant in Subscription Contract</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Change Product</button>
+  </form>
+
+  {% if response_data %}
+    <h3>Response</h3>
+    <pre>{{ response_data|json_script:"response-data" }}</pre>
+  {% endif %}
+{% endblock %}

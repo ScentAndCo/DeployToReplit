@@ -1,0 +1,25 @@
+{% extends "base-embed.html" %}
+
+{% block content %}
+  <div id="customers">
+    <h2>CUSTOMERS</h2>
+    {% if customers %}
+      <ul>
+        {% for customer in customers %}
+          <li>
+            <div class="card">
+              <div class="card-header">
+                <strong>{{ customer.id }}: {{ customer.first_name }} {{ customer.last_name }}</strong>
+              </div>
+              <div class="card-footer">
+                <a class="Polaris-Button Polaris-Button--primary" href="/embed/customer/{{ customer.id }}">View Details</a>
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No customers found.</p>
+    {% endif %}
+  </div>
+{% endblock %}

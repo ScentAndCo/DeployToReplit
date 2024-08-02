@@ -1,0 +1,143 @@
+{% extends "base-embed.html" %}
+
+{% block content %}
+<div id="subscription">
+    <div class="subscription-head">
+        <h2>Subscription Details for {{ customer.id }}</h2>
+    </div>
+
+    <div class="subscription-content">
+        <div class="details-container">
+            <div class="subscription-details">
+                <h4>Subscription Info</h4>
+                <div class="details-holder">
+                    <div class="subscription-id">
+                        <span>Subscription ID:</span>
+                        <span>{{ subscription.id }}</span>
+                    </div>
+                    <div class="subscription-status">
+                        <span>Status:</span>
+                        <span>{{ subscription.status }}</span>
+                    </div>
+                    <div class="subscription-next-billing-date">
+                        <span>Next Billing Date:</span>
+                        <span>{{ subscription.nextBillingDate|date:"d M Y" }}</span>
+                    </div>
+                    <div class="subscription-updated-at">
+                        <span>Updated At:</span>
+                        <span>{{ subscription.updatedAt|date:"d M Y" }}</span>
+                    </div>
+                    <div class="subscription-last-payment-status">
+                        <span>Last Payment Status:</span>
+                        <span>{{ subscription.lastPaymentStatus }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="customer-details">
+                <h4>Customer Info</h4>
+                <div class="details-holder">
+                    <div class="customer-first-name">
+                        <span>First Name:</span>
+                        <span>{{ customer.firstName }}</span>
+                    </div>
+                    <div class="customer-last-name">
+                        <span>Last Name:</span>
+                        <span>{{ customer.lastName }}</span>
+                    </div>
+                    <div class="customer-email">
+                        <span>Email:</span>
+                        <span>{{ customer.email }}</span>
+                    </div>
+                    <div class="customer-phone">
+                        <span>Phone:</span>
+                        <span>{{ customer.phone }}</span>
+                    </div>
+                    <div class="button-container">
+                        <form method="get" action="{% url 'embed_customer' customer.id %}">
+                            <button type="submit" class="Polaris-Button Polaris-Button--primary">View Customer</button>
+                        </form>
+                        <form method="get" action="{% url 'embed_customer_calendars' customer.id %}">
+                            <button type="submit" class="Polaris-Button Polaris-Button--primary">View Calendar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="plan-details">
+            <h4>Plan Details</h4>
+            <div class="details-holder">
+                {% for metafield in customer.metafields.edges %}
+                    <div class="plan-detail">
+                        <span>{{ metafield.node.key|capfirst }}:</span>
+                        <span>{{ metafield.node.value }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="subscription-actions">
+            <h4>Subscription Actions</h4>
+            <div class="actions-holder">
+                <form method="get" action="{% url 'embed_cancel_subscription' subscription.id %}">
+                    <button type="submit" class="Polaris-Button Polaris-Button--primary">Cancel Subscription</button>
+                </form>
+                <form method="get" action="{% url 'embed_skip_subscription' subscription.id customer.id %}">
+                    <button type="submit" class="Polaris-Button Polaris-Button--primary">Skip A Month</button>
+                </form>
+                <form method="get" action="{% url 'embed_renew_subscription' subscription.id %}">
+                    <button type="submit" class="Polaris-Button Polaris-Button--primary">Renew Subscription</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="subscription-products-info">
+            <h4>Products</h4>
+            <div class="products-info-holder">
+                {% if products %}
+                    <ul>
+                        {% for product_id, product in products.items %}
+                            <li class="product-details">
+                                <div class="product-image">
+                                    <img src="{{ product.image_url }}" alt="{{ product.image_alt }}" />
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-title">
+                                        <span>{{ product.vendor }}</span>
+                                        <span>{{ product.title }}</span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>£{{ product.currentPrice.amount }}</span>
+                                        {% if product.premium_value > 0 %}
+                                            <span> £{{ product.premium_value }} Premium Fee (already included in price)</span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="sku">
+                                        <span>{{ product.sku }}</span>
+                                    </div>
+                                    <div class="product-actions">
+                                        <form method="get" action="{% url 'embed_change_subscription_product' subscription.id product_id %}">
+                                            <button type="submit" class="Polaris-Button Polaris-Button--primary">Change Product</button>
+                                        </form>
+                                        <form method="post" action="{% url 'embed_remove_subscription_product' subscription.id product_id %}">
+                                            <button type="submit" class="Polaris-Button Polaris-Button--primary">Remove Product</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <form method="get" action="{% url 'embed_add_subscription_product' subscription.id %}">
+                        <button type="submit" class="Polaris-Button Polaris-Button--primary">Add Product</button>
+                    </form>
+                {% else %}
+                    <p>No products found.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        {% include "embed/_past_orders.html" with past_data=past_orders %}
+    </div>
+</div>
+{% endblock %}

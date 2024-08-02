@@ -1,0 +1,17 @@
+{% extends "base-embed.html" %}
+
+{% block content %}
+<div id="confirm-remove">
+    {% if add%}
+        <h2>Add Calendar Product</h2>
+    {% else %}
+        <h2>Update Calendar Product</h2>
+    {% endif %}
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="Polaris-Button Polaris-Button--primary">Update</button>
+        <a href="{% url 'embed_customer' customer_id %}" class="Polaris-Button">Cancel</a>
+    </form>
+</div>
+{% endblock %}

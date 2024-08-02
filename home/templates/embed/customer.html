@@ -1,0 +1,131 @@
+{% extends "base-embed.html" %}
+
+{% block content %}
+<div id="customer">
+    <div class="customer-head">
+        <h2>{{ customer_id }} - {{ customer.firstName }} {{ customer.lastName }}</h2>
+    </div>
+
+    <div class="customer-content">
+        <div class="customer-contact-info">
+            <h4>Contact Info</h4>
+            <form method="post" action="{% url 'embed_update_customer_contact_info' customer_id %}">
+                {% csrf_token %}
+                <div class="contact-info-holder">
+                    <div class="Polaris-FormLayout__Item">
+                        <label class="Polaris-Label" for="first_name">
+                            <span class="Polaris-Label__Text">First Name:</span>
+                        </label>
+                        <input class="Polaris-TextField__Input" type="text" id="first_name" name="first_name" value="{{ customer.firstName }}">
+                    </div>
+                    <div class="Polaris-FormLayout__Item">
+                        <label class="Polaris-Label" for="last_name">
+                            <span class="Polaris-Label__Text">Last Name:</span>
+                        </label>
+                        <input class="Polaris-TextField__Input" type="text" id="last_name" name="last_name" value="{{ customer.lastName }}">
+                    </div>
+                    <div class="Polaris-FormLayout__Item">
+                        <label class="Polaris-Label" for="email">
+                            <span class="Polaris-Label__Text">Email:</span>
+                        </label>
+                        <input class="Polaris-TextField__Input" type="email" id="email" name="email" value="{{ customer.email }}">
+                    </div>
+                    <div class="Polaris-FormLayout__Item">
+                        <label class="Polaris-Label" for="phone">
+                            <span class="Polaris-Label__Text">Phone:</span>
+                        </label>
+                        <input class="Polaris-TextField__Input" type="text" id="phone" name="phone" value="{{ customer.phone }}">
+                    </div>
+                    <button type="submit" class="Polaris-Button Polaris-Button--primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="customer-order-info">
+            <h4>Order Info</h4>
+            <div class="order-info-holder">
+                <div class="Polaris-FormLayout__Item">
+                    <span>Number of Orders:</span>
+                    <span>{{ customer.numberOfOrders }}</span>
+                </div>
+                <div class="Polaris-FormLayout__Item">
+                    <span>Total Spend:</span>
+                    <span>£{{ customer.amountSpent.amount }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="customer-address-info">
+            <h4>Addresses</h4>
+            <div class="address-info-holder">
+                <div class="Polaris-FormLayout__Item">
+                    <strong>Shipping Address:</strong>
+                    <div>{{ customer.defaultAddress.address1 }}</div>
+                    {% if customer.defaultAddress.address2 %}
+                        <div>{{ customer.defaultAddress.address2 }}</div>
+                    {% endif %}
+                    <div>{{ customer.defaultAddress.formattedArea }}</div>
+                    <div>{{ customer.defaultAddress.postcode }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="customer-subscription-info">
+            <h4>Active Subscription Details</h4>
+            <div class="subscription-info-holder">
+                {% if subscription %}
+                    <div class="Polaris-FormLayout__Item">
+                        <span>Subscription ID:</span>
+                        <span>{{ subscription.id }}</span>
+                    </div>
+                    <div class="Polaris-FormLayout__Item">
+                        <span>Status:</span>
+                        <span>{{ subscription.status }}</span>
+                    </div>
+                    <div class="Polaris-FormLayout__Item">
+                        <span>Next Billing Date:</span>
+                        <span>{{ subscription.nextBillingDate|date:"d M Y" }}</span>
+                    </div>
+                    <div class="Polaris-FormLayout__Item">
+                        <span>Last Payment Status:</span>
+                        <span>{{ subscription.lastPaymentStatus }}</span>
+                    </div>
+                    <form method="get" action="{% url 'embed_subscription' subscription.id %}">
+                        <button type="submit" class="Polaris-Button Polaris-Button--primary">View Subscription</button>
+                    </form>
+                {% else %}
+                    <div class="no-subscription">
+                        No Active Subscription Found
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="customer-metafields">
+            <h4>Customer Plan Details</h4>
+            <form method="post" action="{% url 'embed_update_customer_deets' customer_id %}">
+                {% csrf_token %}
+                <div class="metafields-holder">
+                    <ul>
+                        {% for metafield in customer.metafields.edges %}
+                            {% if metafield.node.namespace == 'deet' %}
+                                <li>
+                                    <label class="Polaris-Label" for="{{ metafield.node.key }}">
+                                        <span class="Polaris-Label__Text">{{ metafield.node.key }}:</span>
+                                    </label>
+                                    <input class="Polaris-TextField__Input" type="text" id="{{ metafield.node.key }}" name="{{ metafield.node.key }}" value="{{ metafield.node.value }}">
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    <button type="submit" class="Polaris-Button Polaris-Button--primary">Save Changes</button>
+                </div> 
+            </form>
+        </div>
+
+        {% include "embed/_customer_events.html" %}
+
+        {% include "embed/_past_orders.html" with past_data=past_orders %}
+    </div>
+</div>
+{% endblock %}
