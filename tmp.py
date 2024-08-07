@@ -355,7 +355,7 @@ def get_products_and_variants_with_sku_suffix():
     data = transform_data_to_dict(data)
     
     # Set up Shopify session
-    session = shopify.Session("247c21-78.myshopify.com", "unstable", "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")
+    session = shopify.Session("247c21-78.myshopify.com", "unstable", "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")
     shopify.ShopifyResource.activate_session(session)
 
     # GraphQL query to fetch products and variants

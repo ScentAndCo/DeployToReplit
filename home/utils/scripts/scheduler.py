@@ -79,7 +79,7 @@ def retry_payment_via_shopify(request, subsrciption_id):
                 return node
         return None
 
-    session = shopify.Session("247c21-78.myshopify.com", "unstable", "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") #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
+    session = shopify.Session("247c21-78.myshopify.com", "unstable", "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") #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
     shopify.ShopifyResource.activate_session(session)
 
     billing_cycles = get_billing_cycles(subsrciption_id)

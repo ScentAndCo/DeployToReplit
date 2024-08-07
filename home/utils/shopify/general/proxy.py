@@ -18,8 +18,8 @@ def handle_get_customer_data(data):
 
     shop = "247c21-78.myshopify.com"
 
-    session = shopify.Session(shop, "unstable", "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") #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
-    shopify.ShopifyResource.activate_session(session)#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
+    session = shopify.Session(shop, "unstable", "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") #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
+    shopify.ShopifyResource.activate_session(session)#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
     
     return JsonResponse(get_calendar_events_for_customer(customer_id, shop))
 
@@ -32,7 +32,7 @@ def handle_add_customer_product_to_calendar(data):
 
     shop = "247c21-78.myshopify.com"
 
-    session = shopify.Session(shop, "unstable", "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")
+    session = shopify.Session(shop, "unstable", "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")
     shopify.ShopifyResource.activate_session(session)
 
     r = add_calendar_event_for_customer(customer_id, product_id, shop, date)
@@ -51,7 +51,7 @@ def handle_remove_customer_product_from_calendar(data):
 
     shop = "247c21-78.myshopify.com"
 
-    session = shopify.Session(shop, "unstable", "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")
+    session = shopify.Session(shop, "unstable", "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")
     shopify.ShopifyResource.activate_session(session)
 
     return JsonResponse(remove_calendar_event_for_customer(customer_id, product_id, shop, date))
@@ -73,7 +73,7 @@ def handle_skip_number_of_months(data):
     shop = data.get('shop')
     n = data.get('number_to_skip', 0)
 
-    session = shopify.Session(shop, "unstable", "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")
+    session = shopify.Session(shop, "unstable", "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")
     shopify.ShopifyResource.activate_session(session)
     r = customer_skip_months(customer_id, shop, n)
 
@@ -86,7 +86,7 @@ def handle_case_each_month(data):
 
     shop = "247c21-78.myshopify.com"
 
-    session = shopify.Session(shop, "unstable", "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")
+    session = shopify.Session(shop, "unstable", "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")
     shopify.ShopifyResource.activate_session(session)
 
     r = customer_case_each_month(customer_id)
@@ -101,7 +101,7 @@ def handle_commited_months(data):
 
     shop = "247c21-78.myshopify.com"
 
-    session = shopify.Session(shop, "unstable", "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")
+    session = shopify.Session(shop, "unstable", "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")
     shopify.ShopifyResource.activate_session(session)
 
     r = customer_commited_months(customer_id, months)
@@ -116,7 +116,7 @@ def handle_products_per_month(data):
 
     shop = "247c21-78.myshopify.com"
     
-    session = shopify.Session(shop, "unstable", "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")
+    session = shopify.Session(shop, "unstable", "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")
     shopify.ShopifyResource.activate_session(session)
 
     r = customer_products_per_month(customer_id, products)
@@ -132,7 +132,7 @@ def handle_sub_frequency(data):
 
     shop = "247c21-78.myshopify.com"
     
-    session = shopify.Session(shop, "unstable", "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")
+    session = shopify.Session(shop, "unstable", "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")
     shopify.ShopifyResource.activate_session(session)
 
     r = customer_sub_frequency(customer_id, frequency)
@@ -146,7 +146,7 @@ def handle_has_case_each_month(data):
 
     shop = "247c21-78.myshopify.com"
 
-    session = shopify.Session(shop, "unstable", "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")
+    session = shopify.Session(shop, "unstable", "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")
     shopify.ShopifyResource.activate_session(session)
 
     r = get_customer_metafield(customer_id, "deet", "case_each_month")
@@ -160,7 +160,7 @@ def handle_is_subscribed(data):
 
     shop = "247c21-78.myshopify.com"
 
-    session = shopify.Session(shop, "unstable", "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")
+    session = shopify.Session(shop, "unstable", "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")
     shopify.ShopifyResource.activate_session(session)
 
     r = is_customer_subscribed(customer_id)
@@ -176,7 +176,7 @@ def handle_cancel_subscription(data):
     customer_id = data.get('customerId')
     shop = data.get('shop')
 
-    session = shopify.Session(shop, "unstable", "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")
+    session = shopify.Session(shop, "unstable", "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")
     shopify.ShopifyResource.activate_session(session)
 
     r = is_customer_subscribed(customer_id)
@@ -195,7 +195,7 @@ def handle_get_customer_deet_details(data):
 
     shop = "247c21-78.myshopify.com"
 
-    session = shopify.Session(shop, "unstable", "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")
+    session = shopify.Session(shop, "unstable", "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")
     shopify.ShopifyResource.activate_session(session)
 
     subbed = is_customer_subscribed(customer_id)
@@ -227,7 +227,7 @@ def handle_get_customers_next_scent(data):
 
     shop = "247c21-78.myshopify.com"
 
-    session = shopify.Session(shop, "unstable", "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")
+    session = shopify.Session(shop, "unstable", "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")
     shopify.ShopifyResource.activate_session(session)
 
     return JsonResponse(fetch_event_details(get_most_recent_future_event(customer_id, shop)))

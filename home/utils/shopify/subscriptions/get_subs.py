@@ -493,3 +493,48 @@ def view_selling_plans():
     response_data = json.loads(response)
 
     return response_data
+
+def view_specific_sub_contract_func(sub_id):
+    
+    sub_id = format_subscriptionContract_id(sub_id)
+    
+    session = shopify.Session("247c21-78.myshopify.com", "unstable", "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")
+    shopify.ShopifyResource.activate_session(session)
+
+    query = """
+    query findContract($subscriptionContractId: ID!) {
+      subscriptionContract(id: $subscriptionContractId) {
+        id
+        status
+        nextBillingDate
+        deliveryMethod{
+          SubscriptionDeliveryMethodShipping{
+            address{
+              address1
+              address2
+              city
+              company
+              country
+              countryCode
+              firstName
+              lastName
+              name
+              phone
+              province
+              provinceCode
+              zip
+            }
+          }
+        }
+      }
+    }
+    """
+
+    variables = {
+        "subscriptionContractId":sub_id
+    }
+
+    response = shopify.GraphQL().execute(query, variables)
+    response_data = json.loads(response)
+
+    return response_data

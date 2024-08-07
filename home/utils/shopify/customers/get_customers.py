@@ -146,7 +146,10 @@ def get_customer_metafield_data(customer_id):
     response = shopify.GraphQL().execute(query, variables=variables)
     response_data = json.loads(response)
 
-    return parse_metafield_data(response_data.get('data', {}).get('customer', {}))
+    try:
+      return parse_metafield_data(response_data.get('data', {}).get('customer', {}))
+    except:
+        return {}
 
 def get_customer_metafield(customer_id, namespace, key):
     return find_metafield_by_namespace_and_key(get_customer_metafield_data(customer_id), namespace, key)

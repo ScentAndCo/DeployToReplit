@@ -96,3 +96,11 @@ def get_customer_orders(customer_id):
     response_data = json.loads(response)
 
     return response_data
+
+def get_all_orders():
+     
+    session = shopify.Session("247c21-78.myshopify.com", "unstable", "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")
+    shopify.ShopifyResource.activate_session(session)
+     
+    query = """
+    """
