@@ -258,6 +258,9 @@ def update_all_product(product_data):
         if product_data["Show In Shop"]:
             tags.append("shop")
 
+        if product_data["Show In Subscription"]:
+            tags.append("subscription")
+
         if not name.startswith(brand+" "):
           name = f"{brand} {name}"
 
@@ -290,7 +293,6 @@ def update_all_product(product_data):
         response = shopify.GraphQL().execute(query, product_input)
     
     for key in product_data:
-        
       print("UPDATING: ",key)
       update_product(key, product_data[key])
 
@@ -431,6 +433,9 @@ def create_products(create_data):
 
       if product_data["Show In Shop"]:
           tags.append("shop")
+
+      if product_data["Show In Subscription"]:
+            tags.append("subscription")
 
       if not name.startswith(brand+" "):
           name = f"{brand} {name}"

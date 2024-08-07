@@ -788,17 +788,20 @@ def row_parser(all_products):
         tags = get_tags(product)
 
         show_in_shop = False
+        is_sub = False
         contains_gc = False
         for tag in tags:
             if tag == "gift card":
                 contains_gc = True
             if tag == "shop":
                 show_in_shop = True
+            if tag == "subscription":
+                is_sub = True
 
         if contains_gc:
             continue
 
-        row = [id, sku, stockcode, productType, "", vendor, title, gender, imageURL, decant_stock, "", 
+        row = [id, sku, stockcode, productType, "", vendor, title, gender, imageURL, decant_stock, is_sub, 
                one_time_price, subscription_price, "", premium, full_bottle_stock, show_in_shop, "",
                full_bottle_price, "", "", fragrance_family, note1, note2, note3, season, occasion, longevity, description,
                "", "", "", ""]
