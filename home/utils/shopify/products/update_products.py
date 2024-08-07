@@ -560,3 +560,5 @@ def create_products(create_data):
       productID = create_product(create_data[product])
       create_variants(productID, create_data[product])
 
+# lets just make sure 
+
